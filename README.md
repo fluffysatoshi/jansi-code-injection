@@ -68,6 +68,6 @@ Hello from 🐦 Fluffy Satoshi
 ```
 
 You might have to run the exploit multiple times: It's a race
-condition. If you get a `open: Permission denied` message. The Jansi
+condition. If you get a `open: Permission denied` message the Jansi
 program has "won" the race and has already written the
 `jansi-{random}.so` file.
