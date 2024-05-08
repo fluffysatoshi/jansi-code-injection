@@ -9,26 +9,20 @@ So the scope of this exploit is quite large.
 
 # How it works
 
-`Jansi` extracts a `.so` library to the global temp folder to implement it's terminal features via OS-depended native code.
+Jansi extracts a ``.so`` library to the global temp folder to implement it's terminal features via OS-depended native code.
 
 It actually creates to files:
 
-1. `jansi-{random}.so.lck` Lock file
-2. `jansi-{random}.so` library file.
 
-Although `random` is a secure random string which cannot be
-predicted this approach creates a race condition between step 1 and
-step 2.
+1. ``jansi-{random}.so.lck`` Lock file
+2. ``jansi-{random}.so`` library file
 
-The exploit watches for `jansi-*lck` file creation in the `tmp`
-folder.
-Once this file is created, it prepares a world-writable
-`jansi-{random}.so` to get ahead of the `Jansi` Java program which
-itself doesn't check if this file already exists and just overwrites
-it (keeping it's world-writeable permissions).
 
-Now the exploit watches for a `CLOSE_NOWRITE` event of the `jansi-{random}.so`
-file and replaces this file via a atomic rename of its own `jansi.so` file.
+Although random is a secure random string which cannot be predicted, this approach creates a race condition between step 1 and step 2.
+
+The exploit watches for ``jansi-*lck`` file creation in the tmp folder. Once this file is created, it prepares a world-writable ``jansi-{random}.so`` to get ahead of the Jansi Java program which itself doesn't check if this file already exists and just overwrites it (keeping it's world-writeable permissions).
+
+Now the exploit watches for a ``CLOSE_NOWRITE`` event of the ``jansi-{random}.so`` file and replaces this file via a atomic rename of its own ``jansi.so`` file.
 
 # Exploit Requirements
 
