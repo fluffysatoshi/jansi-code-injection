@@ -16,7 +16,7 @@ It actually creates to files:
 1. `jansi-{random}.so.lck` Lock file
 2. `jansi-{random}.so` library file.
 
-Although the `random` is a secure random string which cannot be
+Although `random` is a secure random string which cannot be
 predicted this approach creates a race condition between step 1 and
 step 2.
 
